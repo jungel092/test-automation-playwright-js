@@ -8,5 +8,5 @@ test("should open login page", async ({ page }) => {
 test("should open registration page and take screenshot", async ({ page }) => {
     await page.goto("https://team8-2022brno.herokuapp.com/registrace");
 
-    await page.screenshot({ path: "registration_page.png" });
+    await page.screenshot({ path: "test-results/screenshots/registration_page.png" });
 });
