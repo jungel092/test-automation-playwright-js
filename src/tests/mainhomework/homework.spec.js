@@ -1,6 +1,8 @@
 const { test, expect } = require('@playwright/test');
 
 const userFullName = "Elena Iung";
+const inputEmail1 = "shugalp932@gmail.com";
+const inputEmail2 = "shugalp933@gmail.com";
 const validPassword = "Linkin92";
 const invalidPassword = "12345678";
 
@@ -89,7 +91,7 @@ test.describe('Registration Form Tests', () => {
 
   test('Successful registration', async ({ page }) => {
     await test.step('Fill out valid registration data', async () => {
-      await fillRegistrationForm(page, userFullName, 'shugalp928@gmail.com', validPassword, validPassword);
+      await fillRegistrationForm(page, userFullName, inputEmail1, validPassword, validPassword);
     });
 
     await test.step('Submit the form and verify success', async () => {
@@ -101,7 +103,7 @@ test.describe('Registration Form Tests', () => {
 
   test('Registration with existing email', async ({ page }) => {
     await test.step('Fill out form with an existing email', async () => {
-      await fillRegistrationForm(page, userFullName, 'shugalp92@gmail.com', validPassword, validPassword);
+      await fillRegistrationForm(page, userFullName, inputEmail1, validPassword, validPassword);
     });
 
     await test.step('Submit the form and check for errors', async () => {
@@ -112,7 +114,7 @@ test.describe('Registration Form Tests', () => {
 
   test('Registration with invalid password (only numbers)', async ({ page }) => {
     await test.step('Fill out form with invalid password', async () => {
-      await fillRegistrationForm(page, userFullName, 'shugalp889@gmail.com', invalidPassword, invalidPassword);
+      await fillRegistrationForm(page, userFullName, inputEmail2, invalidPassword, invalidPassword);
     });
 
     await test.step('Submit the form and check for errors', async () => {
