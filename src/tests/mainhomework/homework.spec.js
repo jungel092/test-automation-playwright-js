@@ -1,5 +1,9 @@
 const { test, expect } = require('@playwright/test');
 
+const userFullName = "Elena Iung";
+const validPassword = "Linkin92";
+const invalidPassword = "12345678";
+
 test.describe('Registration Form Tests', () => {
   const baseUrl = 'https://team8-2022brno.herokuapp.com/registrace';
 
@@ -69,10 +73,6 @@ test.describe('Registration Form Tests', () => {
      return getRightNavbar(page).locator('[data-toggle="dropdown"]');
   }
 
-  function getUserFullName() {
-    return 'Elena Iung';
-  }
-
   test('Form is displayed correctly', async ({ page }) => {
     const nameField = await getNameField(page);
     await validateVisible(page, nameField);
@@ -89,19 +89,19 @@ test.describe('Registration Form Tests', () => {
 
   test('Successful registration', async ({ page }) => {
     await test.step('Fill out valid registration data', async () => {
-      await fillRegistrationForm(page, getUserFullName(), 'shugalp925@gmail.com', 'Linkin92', 'Linkin92');
+      await fillRegistrationForm(page, userFullName, 'shugalp928@gmail.com', validPassword, validPassword);
     });
 
     await test.step('Submit the form and verify success', async () => {
       await submitForm(page);
       const userName = await getUserNameDropdown(page);
-              await expect(userName).toHaveText(getUserFullName());
+      await expect(userName).toHaveText(userFullName);
     });
   });
 
   test('Registration with existing email', async ({ page }) => {
     await test.step('Fill out form with an existing email', async () => {
-      await fillRegistrationForm(page, getUserFullName(), 'shugalp92@gmail.com', 'Linkin92', 'Linkin92');
+      await fillRegistrationForm(page, userFullName, 'shugalp92@gmail.com', validPassword, validPassword);
     });
 
     await test.step('Submit the form and check for errors', async () => {
@@ -112,7 +112,7 @@ test.describe('Registration Form Tests', () => {
 
   test('Registration with invalid password (only numbers)', async ({ page }) => {
     await test.step('Fill out form with invalid password', async () => {
-      await fillRegistrationForm(page, getUserFullName(), 'shugalp886@gmail.com', '12345678', '12345678');
+      await fillRegistrationForm(page, userFullName, 'shugalp889@gmail.com', invalidPassword, invalidPassword);
     });
 
     await test.step('Submit the form and check for errors', async () => {
